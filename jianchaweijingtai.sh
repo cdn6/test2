@@ -8,14 +8,6 @@ BT_SITE_REWRITE_DIR="/www/server/panel/vhost/rewrite"
 # maccms10 伪静态规则文件
 maccms10_REWRITE_FILE="/www/server/panel/rewrite/nginx/maccms10.conf"
 
-# 需要排除的系统配置文件(支持通配符)
-EXCLUDE_FILES=(
-    "0.*"
-    "btwaf*"
-    "phpfpm_status*"
-    "waf2monitor_data*"
-)
-
 # 统计变量
 has_rewrite=0
 no_rewrite=0
@@ -24,12 +16,6 @@ no_rewrite_sites=()
 
 echo "开始批量设置宝塔面板网站的伪静态规则..."
 echo "----------------------------------------"
-
-# 生成排除参数
-exclude_args=()
-for pattern in "${EXCLUDE_FILES[@]}"; do
-    exclude_args+=(! -name "${pattern}.conf")
-done
 
 # 遍历所有网站的伪静态规则配置文件
 while IFS= read -r -d '' rewrite_config_file; do
@@ -56,7 +42,7 @@ while IFS= read -r -d '' rewrite_config_file; do
         ((has_rewrite++))
         echo "站点 ${site_name} 已设置伪静态规则，跳过。"
     fi
-done < <(find "${BT_SITE_REWRITE_DIR}" -maxdepth 1 -type f -name "*.conf" "${exclude_args[@]}" -print0)
+done < <(find "${BT_SITE_REWRITE_DIR}" -maxdepth 1 -type f -name "*.conf" -print0)
 
 # 输出未设置伪静态的网站列表
 if [ ${#no_rewrite_sites[@]} -gt 0 ]; then
