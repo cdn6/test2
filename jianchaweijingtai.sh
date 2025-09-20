@@ -1,12 +1,12 @@
 #!/bin/bash
 #检查伪静态是否设置及批量设置伪静态
-#使用方法：新建添加程序的伪静态规则（nginx规则）并保存，如maccms-v10程序，0maccms.conf（前面加个0排第一，方便查看），一切就绪后复制本脚本添加到计划任务Shell脚本以root执行使用
+#使用方法：新建添加程序的伪静态规则（nginx规则）并保存，如maccms-v10程序，maccms10.conf（字母前面不能加数字等特殊字符会报错导致不成功），一切就绪后复制本脚本添加到计划任务Shell脚本以root执行使用
 
 # 伪静态规则文件存储路径
 BT_SITE_REWRITE_DIR="/www/server/panel/vhost/rewrite"
 
-# 0maccms10 伪静态规则文件
-0maccms10_REWRITE_FILE="/www/server/panel/rewrite/nginx/0maccms10.conf"
+# maccms10 伪静态规则文件
+maccms10_REWRITE_FILE="/www/server/panel/rewrite/nginx/maccms10.conf"
 
 # 需要排除的系统配置文件(支持通配符)
 EXCLUDE_FILES=(
@@ -38,11 +38,11 @@ while IFS= read -r -d '' rewrite_config_file; do
     
     # 检查文件大小是否为0B
     if [ ! -s "$rewrite_config_file" ]; then
-        # 如果是0B，写入 0maccms10 伪静态规则
-        echo "为站点 ${site_name} 添加 0maccms10 伪静态规则..."
+        # 如果是0B，写入 maccms10 伪静态规则
+        echo "为站点 ${site_name} 添加 maccms10 伪静态规则..."
         
-        # 将 0maccms10 伪静态规则写入该文件
-        cp "$0maccms10_REWRITE_FILE" "$rewrite_config_file"
+        # 将 maccms10 伪静态规则写入该文件
+        cp "$maccms10_REWRITE_FILE" "$rewrite_config_file"
         echo "站点 ${site_name} 伪静态规则已成功添加！"
         
         # 重载 Nginx 配置
