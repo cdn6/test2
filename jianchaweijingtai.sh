@@ -1,6 +1,6 @@
 #!/bin/bash
 #检查伪静态是否设置及批量设置伪静态
-#使用方法：新建添加程序的伪静态规则（nginx规则）并保存，如maccms-v10程序，0maccms.conf（前面加个0排第一，方便查看）
+#使用方法：新建添加程序的伪静态规则（nginx规则）并保存，如maccms-v10程序，0maccms.conf（前面加个0排第一，方便查看），一切就绪后复制本脚本添加到计划任务Shell脚本以root执行使用
 
 # 伪静态规则文件存储路径
 BT_SITE_REWRITE_DIR="/www/server/panel/vhost/rewrite"
