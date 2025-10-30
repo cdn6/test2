@@ -1,3 +1,4 @@
+#MySQL运行监测脚本，计划任务开启Shell脚本每1分钟执行，服务器重启等异常会停止运行MySQL，用这个脚本监测运行状态及自动开启MySQL
 # 获取MySQL服务状态，并检查服务是否处于“active”状态
 status=$(systemctl is-active mysqld)
 
