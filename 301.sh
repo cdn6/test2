@@ -20,7 +20,7 @@ bt_post() {
 }
 
 get_sites() {
-    bt_post "/data?action=getData" "table=sites&limit=200&tojs=1" \
+    bt_post "/data?action=getData" "table=sites&limit=2000&tojs=1" \
     | python3 -c "
 import sys, json
 try:
